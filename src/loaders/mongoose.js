@@ -11,9 +11,11 @@ mongoose.connection.on('error', err => {
 })
 
 // print mongoose logs in dev env
-if (config.env === 'development') {
-  mongoose.set('debug', true)
-}
+// if (config.env === 'development') {
+//   mongoose.set('debug', true)
+// }
+
+mongoose.set('debug', true)
 
 module.exports = async () => {
   const mongoUrl = `${config.mongo.host}:${config.mongo.port}/${config.mongo.db}`
