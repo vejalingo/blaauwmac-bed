@@ -10,9 +10,6 @@
   },
   "author": "Veli Sithole",
   "license": "ISC",
-  "engines": {
-    "node": "12.16.1"
-  },
   "dependencies": {
     "@elastic/elasticsearch": "^7.4.0",
     "@hapi/joi": "^16.1.7",

@@ -30,9 +30,24 @@ exports.readAll = async (req, res, next) => {
     }
 
     const data = await ClaimsModel.find(searchQuery)
+    const dashboardData = data.map(item => {
+      return {
+        name: item.policy_section,
+        'Open Claims': data
+          .filter(pred => pred.policy_section === item.policy_section)
+          .filter(pred => !['Settled', 'Repudiated'].includes(pred.status)).length,
+        'Paid Claims': data
+          .filter(pred => pred.policy_section === item.policy_section)
+          .filter(pred => pred.status === 'Settled').length,
+        Repudiated: data
+          .filter(pred => pred.policy_section === item.policy_section)
+          .filter(pred => pred.status === 'Repudiated').length
+      }
+    })
 
     res.status(httpStatus.OK).json({
-      data
+      data,
+      dashboardData
     })
   } catch (error) {
     next(error)
