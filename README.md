@@ -23,7 +23,3 @@ hjdgsajhdgajsd
 ## Subscribers
 
     - Event handlers for async task
-
-Inspired By BulletProof [link](https://github.com/santiq/bulletproof-nodejs/blob/master/src)
-
-_This project uses node v12 if using v10 please update es6 imports to commonJS require_
