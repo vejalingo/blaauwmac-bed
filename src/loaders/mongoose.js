@@ -23,11 +23,11 @@ module.exports = async () => {
     useNewUrlParser: true,
     useCreateIndex: true,
     keepAlive: 1,
-    useUnifiedTopology: true,
-    auth: {
-      username: config.mongo.user,
-      password: config.mongo.pass
-    }
+    useUnifiedTopology: true
+    // auth: {
+    //   username: config.mongo.user,
+    //   password: config.mongo.pass
+    // }
   })
 
   return connection.connection.db

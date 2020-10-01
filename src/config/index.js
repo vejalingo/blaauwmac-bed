@@ -60,13 +60,7 @@ const config = {
     level: envVars.LOG_LEVEL || 'silly'
   },
   api: {
-    prefix: '/api/v1',
-    cem: '/api/v1/cem'
-  },
-  elk: {
-    user: process.env.ELK_USER,
-    pass: process.env.ELK_PASS,
-    url: process.env.ELK_URL
+    prefix: '/api/v1'
   }
 }
 

@@ -17,7 +17,8 @@ const ClaimSchema = new mongoose.Schema(
       type: Date
     },
     date_registration: {
-      type: Date
+      type: Date,
+      default: Date()
     },
     reason_late_notify: {
       type: String
