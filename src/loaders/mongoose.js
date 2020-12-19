@@ -18,17 +18,18 @@ mongoose.connection.on('error', err => {
 mongoose.set('debug', true)
 
 module.exports = async () => {
-  const mongoUrl = `${config.mongo.host}:${config.mongo.port}/${config.mongo.db}`
+  // const mongoUrl = `${config.mongo.host}:${config.mongo.port}/${config.mongo.db}`
+  const mongoUrl = `mongodb+srv://${config.mongo.user}:${config.mongo.pass}@cluster0.imkph.mongodb.net/blaau?retryWrites=true&w=majority`
   const connection = await mongoose.connect(mongoUrl, {
     useNewUrlParser: true,
-    useCreateIndex: true,
-    keepAlive: 1,
+    // useCreateIndex: true,
+    // keepAlive: 1,
     useUnifiedTopology: true
     // auth: {
     //   username: config.mongo.user,
     //   password: config.mongo.pass
     // }
-  })
+  }, () => console.log("M... Connected"))
 
   return connection.connection.db
 }
