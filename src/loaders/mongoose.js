@@ -1,27 +1,28 @@
-const mongoose = require('mongoose')
-const config = require('../config')
-const Logger = require('./logger')
+const mongoose = require('mongoose');
+const config = require('../config');
+const Logger = require('./logger');
 
 mongoose.Promise = Promise
 
 // Exit application on error
 mongoose.connection.on('error', err => {
-  Logger.error(`MongoDB connection error: ${err}`)
-  process.exit(-1)
+  console.log("----Encountered Error Connecting-----", err);
+  Logger.error(`MongoDB connection error: ${err}`);
+  process.exit(-1);
 })
 
 if (config.env === 'development') {
-  mongoose.set('debug', true)
+  mongoose.set('debug', true);
 }
 
 module.exports = async () => {
-  // :${config.mongo.port}
-  const mongoUrl = `${config.mongo.host}/${config.mongo.db}?retryWrites=true&w=majority`
+  // ?retryWrites=true&w=majority
+  const mongoUrl = `${config.mongo.host}:${config.mongo.port}/${config.mongo.db}`
   const options = {
     useNewUrlParser: true,
-    useCreateIndex: true,
-    keepAlive: 1,
-    useUnifiedTopology: true,
+     useUnifiedTopology: true,
+    // useCreateIndex: true,
+    // keepAlive: 1,
     auth: {
       username: config.mongo.user,
       password: config.mongo.pass
