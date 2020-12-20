@@ -10,18 +10,14 @@ mongoose.connection.on('error', err => {
   process.exit(-1)
 })
 
-// print mongoose logs in dev env
-// if (config.env === 'development') {
-//   mongoose.set('debug', true)
-// }
-
-mongoose.set('debug', true)
+if (config.env === 'development') {
+  mongoose.set('debug', true)
+}
 
 module.exports = async () => {
   // :${config.mongo.port}
   const mongoUrl = `${config.mongo.host}/${config.mongo.db}?retryWrites=true&w=majority`
-  // const mongoUrl = `mongodb+srv://cluster0.imkph.mongodb.net/blaau?retryWrites=true&w=majority`
-  const connection = await mongoose.connect(mongoUrl, {
+  const options = {
     useNewUrlParser: true,
     useCreateIndex: true,
     keepAlive: 1,
@@ -30,7 +26,11 @@ module.exports = async () => {
       username: config.mongo.user,
       password: config.mongo.pass
     }
-  }, (err) => console.log("Error Connecting...", err))
+  }
+  
+  const connection = await mongoose.connect(mongoUrl, options, (err) => console.log("Error Connecting...", err))
+  
+  console.log("connection.connection.db...", connection.connection)
 
   return connection.connection.db
 }
