@@ -29,7 +29,7 @@ module.exports = async () => {
     //   username: config.mongo.user,
     //   password: config.mongo.pass
     // }
-  }, () => console.log("M... Connected"))
+  }, (err) => console.log("Error Connecting...", err))
 
   return connection.connection.db
 }
