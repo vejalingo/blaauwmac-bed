@@ -17,7 +17,8 @@ if (config.env === 'development') {
 
 module.exports = async () => {
   // ?retryWrites=true&w=majority
-  const mongoUrl = `${config.mongo.host}:${config.mongo.port}/${config.mongo.db}`
+  // const mongoUrl = `${config.mongo.host}:${config.mongo.port}/${config.mongo.db}`
+  const mongoUrl = `mongodb://veli:IsVXjiqkULutuT3b@cluster0-shard-00-00.imkph.mongodb.net:27017,cluster0-shard-00-01.imkph.mongodb.net:27017,cluster0-shard-00-02.imkph.mongodb.net:27017/blaau?replicaSet=atlas-nvkbw3-shard-0&ssl=true&authSource=admin`
   const options = {
     useNewUrlParser: true,
      useUnifiedTopology: true,
@@ -29,7 +30,9 @@ module.exports = async () => {
     }
   }
   
-  const connection = await mongoose.connect(mongoUrl, options, (err) => console.log("Error Connecting...", err))
+  // const connection = await mongoose.connect(mongoUrl, options, (err) => console.log("Error Connecting...", err))
+  
+  const connection = await mongoose.connect(mongoUrl)
   
   console.log("connection.connection.db...", connection.connection)
 
